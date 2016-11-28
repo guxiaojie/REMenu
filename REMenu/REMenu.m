@@ -33,7 +33,7 @@
 
 @end
 
-@interface REMenu ()
+@interface REMenu () <UIScrollViewDelegate>
 
 @property (strong, readwrite, nonatomic) UIView *menuView;
 @property (strong, readwrite, nonatomic) UIView *menuWrapperView;
@@ -121,6 +121,7 @@
     //
     self.containerView = ({
         REMenuContainerView *view = [[REMenuContainerView alloc] init];
+        view.delegate = self;
         view.clipsToBounds = YES;
         view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         
@@ -418,4 +419,11 @@
     return [UIImage imageWithCGImage:outputImage.CGImage scale:2.0 orientation:UIImageOrientationUp];
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGPoint offset = scrollView.contentOffset;
+    if (offset.y < 0) {
+        offset.y = 0;
+    }
+    scrollView.contentOffset = offset;
+}
 @end
