@@ -228,6 +228,7 @@
         self.toolbar.frame = self.menuWrapperView.bounds;
     }
     self.containerView.frame = CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
+    self.containerView.contentSize = CGSizeMake(rect.size.width, CGRectGetMaxY(self.menuView.subviews.lastObject.frame));
     self.backgroundButton.frame = self.containerView.bounds;
     
     // Add subviews
